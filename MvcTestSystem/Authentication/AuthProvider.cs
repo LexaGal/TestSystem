@@ -19,7 +19,7 @@ namespace MvcTestSystem.Authentication
         public User Authenticate(string username, string password)
         {
             User user =_usersRepository.GetAll().ToList().SingleOrDefault(c =>
-                c.Name == username && c.PasswordHash == _cryptor.Encrypt(password));
+                c.Username == username && c.PasswordHash == _cryptor.Encrypt(password));
             return user;
         }
 

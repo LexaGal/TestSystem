@@ -7,6 +7,7 @@ namespace MvcTestSystem.Models
     {
         [Key]
         public int Id { get; private set; }
+
         public int CodeId { get; private set; }
         public bool ResultState { get; private set; }
 
