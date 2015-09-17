@@ -5,8 +5,8 @@ namespace MvcTestSystem.Repository.Concrete
 {
     public abstract class Repository<T> : IRepository<T> where T: class
     {
-        protected PlantingDb Context = new PlantingDb();
-        //protected string ConnectionString = ConfigurationManager.ConnectionStrings["PlantingDb"].ConnectionString;
+        protected TestSystemDb Context = new TestSystemDb();
+        //protected string ConnectionString = ConfigurationManager.ConnectionStrings["TestSystemDb"].ConnectionString;
 
         public virtual IQueryable<T> GetAll()
         {
