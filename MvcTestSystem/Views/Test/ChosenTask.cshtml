@@ -1,0 +1,78 @@
+﻿@model TestDatabase.Entities.Task
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+
+@{
+    ViewBag.Title = "ChosenTask";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ChosenTask</h2>
+
+<fieldset>
+    <legend>Task</legend>
+
+     <div class="display-label">
+        @Html.DisplayNameFor(model => model.Name):
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Memory), mb.:
+        @Html.DisplayFor(model => model.Memory)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Time), sec.:
+        @Html.DisplayFor(model => model.Time)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Description):
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Result):
+        @Html.DisplayFor(model => model.Result)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Price):
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+</fieldset>
+
+<div>
+    <textarea id="code"></textarea>
+</div>
+
+<div>
+    <textarea id="result"></textarea>
+</div>
+
+<p>
+    <button id="process">Process</button>
+</p>
+
+<script type="text/javascript">
+
+    $('#process').click(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ChosenTask", "Test")',
+            traditional: true,
+            data: { taskId: '@Model.Id', codeText: $('#code').val() },
+            success: function(data) {
+                $('#result').text(data);
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    });
+    
+</script>
+@Html.ActionLink("Back to List", "Index")

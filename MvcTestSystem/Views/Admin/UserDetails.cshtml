@@ -1,0 +1,25 @@
+﻿@model TestDatabase.Entities.User
+
+@{
+    ViewBag.Title = "UserDetails";
+}
+
+<h2>User details</h2>
+
+<fieldset>
+    <legend>User</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name):
+         @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.PasswordHash):
+        @Html.DisplayFor(model => model.PasswordHash)
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

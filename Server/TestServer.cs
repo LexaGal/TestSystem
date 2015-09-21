@@ -8,8 +8,5 @@ namespace Server
 {
     public class TestServer
     {
-        //Hi
-        //New hi
-        //all good
     }
 }

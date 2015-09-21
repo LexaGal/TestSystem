@@ -1,0 +1,95 @@
+﻿@using Microsoft.Practices.Unity
+@using MvcTestSystem.Unity
+@using TestDatabase.Entities
+@using TestDatabase.Repository.Abstract
+
+@model IEnumerable<TestDatabase.Entities.User>
+
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Statistics</h2>
+
+@{
+    ITaskRepository taskRepository = MvcUnityContainer.Container.Resolve<ITaskRepository>();
+    IEnumerable<Task> tasks = taskRepository.GetAll().AsEnumerable();
+}
+<table>
+    <tr>
+        <th>Users/Tasks</th>
+        @{
+            foreach (var task in tasks)
+            {
+            <th>
+                @Html.ActionLink(task.Name, "TaskDetails", new { task.Id })
+            </th>
+            }
+            <th>Total</th>
+            <th></th>
+        }
+    </tr>
+    <tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.Encode(item.Name)
+                </td>
+
+                @foreach (var task in tasks)
+                {
+                    <td>
+                        @{
+                            if (item.SolvedTasks.Any(t => t.Id == task.Id))
+                            {
+                                @Html.Encode("Done")
+                                continue;
+                            }
+                            @Html.Encode('-')
+                        }
+                    </td>
+                }
+                <td>@item.SolvedTasks.Sum(t => t.Price)</td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteUser", new {item.Id})
+                </td>
+
+            </tr>
+
+        }
+    </tr>
+
+   @* <tr>
+        <th></th>
+        @{foreach (var task in tasks)
+          {
+              <td>
+                  @Html.ActionLink("Edit", "EditTask", new {task.Id})
+              </td>
+          }
+            <th></th>
+            <th></th>
+        }
+    </tr>*@
+    <tr>
+        <th></th>
+        @{foreach (var task in tasks)
+          {
+              <td>
+                  @Html.ActionLink("Delete", "DeleteTask", new {task.Id})
+              </td>
+          }
+            <th></th>
+            <th></th>
+        }
+    </tr>
+    </table>
+<div>
+    @Html.ActionLink("Create user", "CreateUser")
+</div>
+<div>
+    @Html.ActionLink("Create task", "CreateTask")
+</div>
+<div>@Html.ActionLink("Log Out", "LogIn", "Account")</div>
