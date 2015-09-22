@@ -7,3 +7,4 @@ C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\Tes
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\obj\Debug\TestDatabase.dll
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\obj\Debug\TestDatabase.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\obj\Debug\TestDatabase.csprojResolveAssemblyReference.cache

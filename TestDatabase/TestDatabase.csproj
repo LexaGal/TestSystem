@@ -61,7 +61,7 @@
     <Compile Include="Repository\Abstract\IUserRepository.cs" />
     <Compile Include="Repository\Concrete\CodeRepository.cs" />
     <Compile Include="Repository\Concrete\Repository.cs" />
-    <Compile Include="Repository\Concrete\SensorRepository.cs" />
+    <Compile Include="Repository\Concrete\ResultRepository.cs" />
     <Compile Include="Repository\Concrete\TaskRepository.cs" />
     <Compile Include="Repository\Concrete\UserRepository.cs" />
     <Compile Include="Context\TestSystemDb.cs" />

@@ -55,6 +55,10 @@
     <button id="process">Process</button>
 </p>
 
+<p>
+    <button id="refresh">Refresh</button>
+</p>
+
 <script type="text/javascript">
 
     $('#process').click(function(e) {
@@ -74,5 +78,20 @@
         });
     });
     
+    $('#refresh').click(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CheckTask", "Test")',
+            traditional: true,
+            success: function (data) {
+                $('#result').text(data);
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    });
 </script>
 @Html.ActionLink("Back to List", "Index")

@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
+using System.Linq;
 using TestDatabase.Context;
 using TestDatabase.Repository.Abstract;
 
@@ -8,7 +11,7 @@ namespace TestDatabase.Repository.Concrete
     {
         protected TestSystemDb Context = new TestSystemDb();
         //protected string ConnectionString = ConfigurationManager.ConnectionStrings["TestSystemDb"].ConnectionString;
-
+        
         public virtual IQueryable<T> GetAll()
         {
             return Context.Set<T>().AsQueryable();

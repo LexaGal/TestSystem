@@ -23,10 +23,8 @@ namespace MvcTestSystem.Controllers
             _userRepository = userRepository;
         }
         
-        private string SendToServer(string codeText)
-        {
-            return "Ok";
-        }
+        private void SendToServer(string codeText)
+        {}
 
         public ActionResult Index()
         {
@@ -50,26 +48,38 @@ namespace MvcTestSystem.Controllers
         public string ChosenTask(int taskId, string codeText)
         {
             User user = ((User) Session["user"]);
-            
             Task task = _taskRepository.Get(taskId);
-
             user.Tasks.Add(task);
 
             Code code = new Code(user.Id, taskId, codeText);
             _codeRepository.Add(code);
-            
-            string taskResult = SendToServer(codeText);
-            Result result = new Result(code.Id, taskResult);
-            _resultRepository.Add(result);
 
-            if (taskResult == "Ok")
+            Session["code"] = code;
+
+            SendToServer(codeText);
+            
+            return "Testing";
+        }
+
+        public string CheckTask()
+        {
+            Code code = ((Code) Session["code"]);
+            User user = _userRepository.Get(code.UserId);
+            Task task = _taskRepository.Get(code.TaskId);
+
+            if (_resultRepository.GetAll().Any(r => r.CodeId == code.Id))
             {
-                user.SolvedTasks.Add(task);
+                Result result = _resultRepository.GetAll().First(r => r.CodeId == code.Id);
+                if (result.ResultState == "Ok")
+                {
+                    user.SolvedTasks.Add(task);
+                }
+                return result.ResultState;
             }
 
-            return taskResult;
+            return "Testing";
         }
-        
+
         public ActionResult Statistics()
         {
             IList<Task> tasks = _taskRepository.GetAll().AsEnumerable().ToList();
