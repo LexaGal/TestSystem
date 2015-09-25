@@ -1,7 +1,6 @@
-﻿using System.Configuration;
-using System.Linq;
-using MvcTestSystem.Models;
-using MvcTestSystem.Repository.Abstract;
+﻿using System.Linq;
+using TestDatabase.Entities;
+using TestDatabase.Repository.Abstract;
 
 namespace MvcTestSystem.Authentication
 {
@@ -19,13 +18,20 @@ namespace MvcTestSystem.Authentication
         public User Authenticate(string username, string password)
         {
             User user =_usersRepository.GetAll().ToList().SingleOrDefault(c =>
-                c.Username == username && c.PasswordHash == _cryptor.Encrypt(password));
+                c.Name == username && c.PasswordHash == _cryptor.Encrypt(password));
             return user;
         }
 
-        public User Register(string username, string password, Role role)
+        public User Register(string username, string password, string role)
         {
-            User user = new User(username, _cryptor.Encrypt(password), role);
+            User user;
+            if (role == "Admin")
+            {
+                user = new User(username, _cryptor.Encrypt(password), "Admin");
+                _usersRepository.Add(user);
+                return user;    
+            }
+            user = new User(username, _cryptor.Encrypt(password), "User");
             _usersRepository.Add(user);
             return user;    
         }

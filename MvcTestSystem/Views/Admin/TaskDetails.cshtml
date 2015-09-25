@@ -1,0 +1,64 @@
+﻿@using Microsoft.Practices.Unity
+@using MvcTestSystem.Unity
+@using MvcTestSystem.UsersInfoAccess
+@using TestDatabase.Entities
+@using TestDatabase.Repository.Abstract
+@model TestDatabase.Entities.Task
+
+@{
+    ViewBag.Title = "TaskDetails";
+}
+
+<h2>Task details</h2>
+
+<fieldset>
+    <legend>Task</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Name):
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Memory), mb.:
+        @Html.DisplayFor(model => model.Memory)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Time), sec.:
+        @Html.DisplayFor(model => model.Time)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Description):
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Result):
+        @Html.DisplayFor(model => model.Result)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Price):
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+</fieldset>
+@{
+    IUserRepository userRepository = MvcUnityContainer.Container.Resolve<IUserRepository>();
+    IEnumerable<User> users = userRepository.GetAll().AsEnumerable();
+    @Html.Encode("Solved by: ")<br/>
+    
+    foreach (var user in users)
+    {
+        IList<Task> tasks = UsersInfo.GetUserSolvedTasks(user.Id, new List<Task>{Model}).ToList();
+        if (tasks.Any(t => t.Id == Model.Id))
+        {
+            @Html.Encode(user.Name)<br/>
+        }
+    } 
+}
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

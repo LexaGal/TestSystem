@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTestSystem", "MvcTestSystem\MvcTestSystem.csproj", "{467AFBE8-987F-495A-BC2C-F6C8F8B1B2B4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{0179B328-56F2-4491-8B3F-D4A563A17136}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDatabase", "TestDatabase\TestDatabase.csproj", "{9687E0DF-3989-4924-97E2-C6817C8AF942}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +21,10 @@ Global
 		{0179B328-56F2-4491-8B3F-D4A563A17136}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0179B328-56F2-4491-8B3F-D4A563A17136}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0179B328-56F2-4491-8B3F-D4A563A17136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9687E0DF-3989-4924-97E2-C6817C8AF942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9687E0DF-3989-4924-97E2-C6817C8AF942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9687E0DF-3989-4924-97E2-C6817C8AF942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9687E0DF-3989-4924-97E2-C6817C8AF942}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

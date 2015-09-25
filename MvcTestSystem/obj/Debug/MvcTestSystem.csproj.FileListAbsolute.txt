@@ -1,4 +1,3 @@
-C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\obj\Debug\MvcTestSystem.csprojResolveAssemblyReference.cache
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\MvcTestSystem.dll
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\MvcTestSystem.pdb
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Antlr3.Runtime.dll
@@ -25,3 +24,18 @@ C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\Mvc
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\System.Web.WebPages.Razor.xml
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\obj\Debug\MvcTestSystem.dll
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\obj\Debug\MvcTestSystem.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Microsoft.Practices.ServiceLocation.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Microsoft.Practices.Unity.Configuration.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Microsoft.Practices.Unity.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Microsoft.Practices.Unity.Mvc.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\WebActivatorEx.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Microsoft.Practices.ServiceLocation.xml
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Microsoft.Practices.Unity.xml
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Microsoft.Practices.Unity.Configuration.xml
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Microsoft.Practices.Unity.Mvc.xml
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\obj\Debug\MvcTestSystem.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\TestDatabase.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\TestDatabase.pdb

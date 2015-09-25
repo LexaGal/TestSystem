@@ -1,0 +1,43 @@
+﻿@model MvcTestSystem.Models.LoginModel
+
+@{
+    ViewBag.Title = "LogIn";
+}
+
+<h2>Log In</h2>
+
+@using (Html.BeginForm("LogIn", "Account"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    <fieldset>
+        <legend>User</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <p>
+            <input type="submit" value="Log In" />
+        </p>
+
+    </fieldset>
+}
+
+@Html.ActionLink("Register", "Register", "Account")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
