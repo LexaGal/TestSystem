@@ -11,6 +11,7 @@ namespace TestDatabase.Context
         public DbSet<Task> Tasks;
         public DbSet<Code> Codes;
         public DbSet<Result> Results;
+        public DbSet<Test> Tests;
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -18,6 +19,7 @@ namespace TestDatabase.Context
             modelBuilder.Entity<Task>().ToTable("Tasks");
             modelBuilder.Entity<Code>().ToTable("Codes");
             modelBuilder.Entity<Result>().ToTable("Results");
+            modelBuilder.Entity<Test>().ToTable("Tests");
         }
     }
 

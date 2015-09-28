@@ -14,6 +14,7 @@ namespace MvcTestSystem.Unity
             Container.RegisterType<ICodeRepository, CodeRepository>();
             Container.RegisterType<IResultRepository, ResultRepository>();
             Container.RegisterType<IUserRepository, UserRepository>();
+            Container.RegisterType<ITestRepository, TestRepository>();
             Container.RegisterType<IAuthProvider, AuthProvider>();
             Container.RegisterType<ICryptor, PasswordCryptor>();
         }

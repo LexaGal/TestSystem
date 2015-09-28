@@ -4,7 +4,7 @@ namespace TestDatabase.Entities
 {
     public class Code
     {
-       [Key]
+        [Key]
         public int Id { get; private set; }
 
         public int UserId { get; private set; }

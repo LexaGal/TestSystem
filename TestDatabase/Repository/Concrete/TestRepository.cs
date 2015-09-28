@@ -1,13 +1,11 @@
-﻿using System.Data.Entity.Infrastructure;
-using System.Diagnostics;
 using TestDatabase.Entities;
 using TestDatabase.Repository.Abstract;
 
 namespace TestDatabase.Repository.Concrete
 {
-    public class ResultRepository : Repository<Result>, IResultRepository
+    public class TestRepository : Repository<Test>, ITestRepository
     {
-        public override bool Edit(int id, Result value)
+        public override bool Edit(int id, Test value)
         {
             throw new System.NotImplementedException();
         }

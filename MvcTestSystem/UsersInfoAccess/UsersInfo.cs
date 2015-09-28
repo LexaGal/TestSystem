@@ -19,8 +19,14 @@ namespace MvcTestSystem.UsersInfoAccess
                     .GetAll()
                     .AsEnumerable()
                     .Where(c => c.UserId == id)
-                    .Where(c => ResultRepository.GetAll()
-                        .First(r => r.CodeId == c.Id).ResultState == "Ok");
+                    .Where(c =>
+                    {
+                        if (ResultRepository.GetAll().Any(r => r.CodeId == c.Id && r.ResultState == "OK"))
+                        {
+                            return true;
+                        }
+                        return false;
+                    });
 
             foreach (var code in codes)
             {
