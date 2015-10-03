@@ -40,6 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Result.cs" />
+    <Compile Include="ITester.cs" />
+    <Compile Include="FailReason.cs" />
+    <Compile Include="Runer.cs" />
+    <Compile Include="ProcessBuilder.cs" />
     <Compile Include="CSharpCompiler.cs" />
     <Compile Include="ICompiler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
