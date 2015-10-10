@@ -10,14 +10,14 @@ namespace TestServer
             proc.Start();
             proc.MaxWorkingSet = new IntPtr(1000000);
             proc.StandardInput.WriteLine(input);
-            if (!proc.WaitForExit(10000))
+            if (!proc.WaitForExit(1000))
             {
                 proc.Close();
                 output = string.Empty;
-
                 return false;
             }
-            output = proc.StandardOutput.ReadToEnd();
+            var tmp  = proc.StandardOutput.ReadToEnd();
+            output = tmp.Remove(tmp.Length - 3, 2);
             return true;
         }
     }

@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ServerScheduler.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="ITester.cs" />
     <Compile Include="FailReason.cs" />
@@ -67,6 +68,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestDatabase\TestDatabase.csproj">
+      <Project>{9687e0df-3989-4924-97e2-c6817c8af942}</Project>
+      <Name>TestDatabase</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
