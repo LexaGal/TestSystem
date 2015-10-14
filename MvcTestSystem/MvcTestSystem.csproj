@@ -171,6 +171,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Authentication\AuthenticationException.cs" />
     <Compile Include="Authentication\AuthProvider.cs" />
+    <Compile Include="Authentication\AuthAttribute.cs" />
     <Compile Include="Authentication\IAuthProvider.cs" />
     <Compile Include="Authentication\ICryptor.cs" />
     <Compile Include="Models\CodeViewModel.cs" />

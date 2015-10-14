@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using MvcTestSystem.Authentication;
 using MvcTestSystem.UsersInfoAccess;
 using TestDatabase.Entities;
 using TestDatabase.Repository.Abstract;
 
 namespace MvcTestSystem.Controllers
 {
+    [Auth]
     public class AdminController : Controller
     {
         private readonly ITaskRepository _taskRepository;
