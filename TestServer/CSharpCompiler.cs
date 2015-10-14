@@ -1,4 +1,5 @@
-﻿using System.CodeDom.Compiler;
+﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using Microsoft.CSharp;
 
@@ -16,8 +17,15 @@ namespace TestServer
                 OutputAssembly = outputAssembly,
                 GenerateExecutable = true
             };
-
-            var results = provider.CompileAssemblyFromSource(compilerParams, code);
+            CompilerResults results = new CompilerResults(null);
+            try
+            {
+                results = provider.CompileAssemblyFromSource(compilerParams, code);
+            }
+            catch (Exception e)
+            {
+                int i = 0;
+            }
             return !results.Errors.HasErrors;
         }
     }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Quartz;
+using TestDatabase.Entities;
 using TestDatabase.Repository.Concrete;
 
 namespace TestServer
@@ -18,19 +20,19 @@ namespace TestServer
                         ICompiler compiler = new CSharpCompiler();
                         var processBuilder = new ProcessBuilder();
                         var runer = new Runer();
-                        var code = codeRepository.GetAll().ToList();
-                        code.ForEach(item =>
+                        List<Code> codes = codeRepository.ExtractAll().ToList();
+                        codes.ForEach(item =>
                         {
-                            if (!compiler.TryCompile(item.Text, "test.exe"))
+                            if (!compiler.TryCompile(item.Text, @"F://test.exe"))
                             {
                                 resultRepository.Add(new TestDatabase.Entities.Result(item.Id, "compilation error"));
                             }
                             else
                             {
-                                var tests = testRepository.GeTestsByTaskId(item.TaskId).ToList();
+                                var tests = testRepository.GetTestsByTaskId(item.TaskId).ToList();
                                 for (var i = 0; i < tests.Count; i++)
                                 {
-                                    var proc = processBuilder.Create("test.exe");
+                                    var proc = processBuilder.Create(@"F://test.exe");
                                     string output;
                                     try
                                     {

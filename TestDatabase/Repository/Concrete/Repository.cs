@@ -2,8 +2,10 @@
 using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using System.Linq;
+using System.Transactions;
 using TestDatabase.Context;
 using TestDatabase.Repository.Abstract;
+using TestDatabase.Transactions;
 
 namespace TestDatabase.Repository.Concrete
 {
@@ -24,25 +26,49 @@ namespace TestDatabase.Repository.Concrete
 
         public virtual bool Add(T value)
         {
-            Context.Set<T>().Add(value);
-            Context.SaveChanges();
-            Dispose();
-            return true;
+            using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    Context.Set<T>().Add(value);
+                    Context.SaveChanges();
+                    Dispose();
+                    transactionScope.Complete();
+                }
+                catch (Exception)
+                {
+                    Transaction.Current.Rollback();
+                    return false;
+                }
+                return true;
+            }
         }
 
         public abstract bool Edit(int id, T value);
-        
+
+
         public virtual bool Delete(int id)
         {
-            T t = Context.Set<T>().Find(id);
-            if (t != null)
+            using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew))
             {
-                Context.Set<T>().Remove(t);
-                Context.SaveChanges();
-                Dispose();
+                try
+                {
+                    T t = Context.Set<T>().Find(id);
+                    if (t != null)
+                    {
+                        Context.Set<T>().Remove(t);
+                        Context.SaveChanges();
+                        Dispose();
+                        transactionScope.Complete();
+                    }
+                }
+                catch (Exception)
+                {
+                    Transaction.Current.Rollback();
+                    return false;
+                }
                 return true;
             }
-            return false;
         }
 
         public virtual void Dispose()

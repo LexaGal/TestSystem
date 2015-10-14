@@ -11,7 +11,7 @@ namespace TestDatabase.Repository.Concrete
             throw new System.NotImplementedException();
         }
 
-        public IQueryable<Test> GeTestsByTaskId(int taskId)
+        public IQueryable<Test> GetTestsByTaskId(int taskId)
         {
             return GetAll().Where(t => t.TaskId == taskId);
         }

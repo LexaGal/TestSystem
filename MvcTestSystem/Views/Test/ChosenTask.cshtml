@@ -64,16 +64,19 @@
     $('#process').click(function(e) {
         e.preventDefault();
 
+        var params = { Id: '@Model.Id', Code: $('#code').val() };
+        var jsonParams = JSON.stringify(params);
         $.ajax({
             type: "POST",
             url: '@Url.Action("ChosenTask", "Test")',
-            traditional: true,
-            data: { taskId: '@Model.Id', codeText: $('#code').val() },
-            success: function(data) {
+            data: jsonParams,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
                 $('#result').text(data);
             },
-            error: function (data) {
-                alert(data);
+            error: function () {
+                $('#result').text("Testing");
             }
         });
     });
@@ -88,8 +91,8 @@
             success: function (data) {
                 $('#result').text(data);
             },
-            error: function (data) {
-                alert(data);
+            error: function () {
+                $('#result').text("Testing");
             }
         });
     });

@@ -8,7 +8,7 @@ namespace TestServer
         public bool TryGetResult(Process proc, string input, out string output)
         {
             proc.Start();
-            proc.MaxWorkingSet = new IntPtr(1000000);
+            proc.MaxWorkingSet = new IntPtr(100000);
             proc.StandardInput.WriteLine(input);
             if (!proc.WaitForExit(1000))
             {

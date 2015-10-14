@@ -7,4 +7,8 @@ C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\Tes
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\obj\Debug\TestDatabase.dll
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\obj\Debug\TestDatabase.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\bin\Debug\PostSharp.dll
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\bin\Debug\PostSharp.xml
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\bin\Debug\TestDatabase.pssym
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\obj\Debug\TestDatabase.dll.postsharp
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\TestDatabase\obj\Debug\TestDatabase.csprojResolveAssemblyReference.cache

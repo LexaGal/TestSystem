@@ -9,10 +9,10 @@
             FailedTestNumber = failedTestNumber;
         }
 
-        public bool IsPassed { get; }
+        public bool IsPassed { get; set; }
 
-        public FailReason FailReason { get; }
+        public FailReason FailReason { get; set; }
 
-        public int FailedTestNumber { get; }
+        public int FailedTestNumber { get; set; }
     }
 }

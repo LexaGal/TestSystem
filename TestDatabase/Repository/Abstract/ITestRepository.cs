@@ -5,6 +5,6 @@ namespace TestDatabase.Repository.Abstract
 {
     public interface ITestRepository : IRepository<Test>
     {
-        IQueryable<Test> GeTestsByTaskId(int taskId);
+        IQueryable<Test> GetTestsByTaskId(int taskId);
     }
 }

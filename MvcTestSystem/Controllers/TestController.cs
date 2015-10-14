@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using MvcTestSystem.Models;
 using MvcTestSystem.UsersInfoAccess;
 using TestDatabase.Entities;
 using TestDatabase.Repository.Abstract;
-using TestDatabase.Repository.Concrete;
 
 namespace MvcTestSystem.Controllers
 {
@@ -24,9 +25,6 @@ namespace MvcTestSystem.Controllers
             _userRepository = userRepository;
         }
         
-        private void SendToServer(string codeText)
-        {}
-
         public ActionResult Index()
         {
             IList<Task> tasks = _taskRepository.GetAll().AsEnumerable().ToList();
@@ -46,19 +44,16 @@ namespace MvcTestSystem.Controllers
         }
 
         [HttpPost]
-        public string ChosenTask(int taskId, string codeText)
+        public string ChosenTask(CodeViewModel codeViewModel)
         {
             User user = ((User) Session["user"]);
-            Task task = _taskRepository.Get(taskId);
+            Task task = _taskRepository.Get(Convert.ToInt32(codeViewModel.Id));
             user.Tasks.Add(task);
 
-            Code code = new Code(user.Id, taskId, codeText);
+            Code code = new Code(user.Id, Convert.ToInt32(codeViewModel.Id), codeViewModel.Code);
             _codeRepository.Add(code);
-
             Session["code"] = code;
 
-            SendToServer(codeText);
-            
             return "Testing";
         }
 
@@ -68,16 +63,16 @@ namespace MvcTestSystem.Controllers
             User user = _userRepository.Get(code.UserId);
             Task task = _taskRepository.Get(code.TaskId);
 
-            if (_resultRepository.GetAll().Any(r => r.CodeId == code.Id))
+            Result result = _resultRepository.GetLastResultByCodeId(code.Id);
+            if (result != null)
             {
-                Result result = _resultRepository.GetAll().First(r => r.CodeId == code.Id);
                 if (result.ResultState == "Ok")
                 {
                     user.SolvedTasks.Add(task);
+                    return result.ResultState;
                 }
                 return result.ResultState;
             }
-
             return "Testing";
         }
 

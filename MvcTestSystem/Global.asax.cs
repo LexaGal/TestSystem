@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using MvcTestSystem.Unity;
+using TestServer;
 
 namespace MvcTestSystem
 {
@@ -23,6 +24,7 @@ namespace MvcTestSystem
             MvcUnityContainer.Initialize();
             DependencyResolver.SetResolver(new UnityDependencyResolver(MvcUnityContainer.Container));
             
+            ServerScheduler.Start();
         }
     }
 }
