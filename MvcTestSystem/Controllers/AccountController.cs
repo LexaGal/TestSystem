@@ -5,6 +5,7 @@ using TestDatabase.Entities;
 
 namespace MvcTestSystem.Controllers
 {
+    [Auth]
     public class AccountController : Controller
     {
         private readonly IAuthProvider _authProvider;
@@ -36,8 +37,8 @@ namespace MvcTestSystem.Controllers
                     }
                     return Redirect(returnUrl ?? Url.Action("Index", "Admin"));
                 }
+                TempData["CustomError"] = @"Error: User with such login and password does not exist";
             }
-            ModelState.AddModelError("LoginModel", "Пользователя с таким логином и паролем нет");
             return View();
         }
 
@@ -56,18 +57,22 @@ namespace MvcTestSystem.Controllers
                 var user = _authProvider.Authenticate(registerModel.Name, registerModel.Password);
                 if (user != null)
                 {
-                    ModelState.AddModelError("RegisterModel", "Пользователь с таким логином и паролем уже есть");
+                    TempData["CustomError"] = string.Format("Error: User with name '{0}' already exists", user.Name);
                     return View();
                 }
                 
                 user = _authProvider.Register(registerModel.Name, registerModel.Password, registerModel.Role);
-                Session["user"] = user;
+                
+                string returnUrl = Session["returnUrl"] as string;
 
+                if (returnUrl != null && returnUrl.Contains("Admin")) return Redirect(Url.Action("Index", "Admin"));
+
+                Session["user"] = user;
                 if (user.Role == Role.User.ToString())
                 {
-                    return Redirect(Session["returnUrl"] as string ?? Url.Action("Index", "Test"));
+                    return Redirect(Url.Action("Index", "Test"));
                 }
-                return Redirect(Session["returnUrl"] as string ?? Url.Action("Index", "Admin"));
+                return Redirect(Url.Action("Index", "Admin"));
             }
             return View(registerModel);
         }

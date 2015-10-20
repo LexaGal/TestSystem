@@ -8,7 +8,7 @@ namespace TestServer
         public bool TryGetResult(Process proc, string input, out string output)
         {
             proc.Start();
-            proc.MaxWorkingSet = new IntPtr(100000);
+            //proc.MaxWorkingSet = new IntPtr(10000);
             proc.StandardInput.WriteLine(input);
             if (!proc.WaitForExit(1000))
             {
@@ -16,8 +16,14 @@ namespace TestServer
                 output = string.Empty;
                 return false;
             }
-            var tmp  = proc.StandardOutput.ReadToEnd();
-            output = tmp.Remove(tmp.Length - 3, 2);
+            string tmp  = proc.StandardOutput.ReadToEnd();
+            
+            output = tmp;
+            if (tmp.Length > 2)
+            {
+                output = tmp.Remove(tmp.Length - 3, 2);
+            }
+            
             return true;
         }
     }

@@ -12,6 +12,7 @@ namespace MvcTestSystem.Unity
             Container = new UnityContainer();
             Container.RegisterType<ITaskRepository, TaskRepository>();
             Container.RegisterType<ICodeRepository, CodeRepository>();
+            Container.RegisterType<IAllCodeRepository, AllCodeRepository>();
             Container.RegisterType<IResultRepository, ResultRepository>();
             Container.RegisterType<IUserRepository, UserRepository>();
             Container.RegisterType<ITestRepository, TestRepository>();

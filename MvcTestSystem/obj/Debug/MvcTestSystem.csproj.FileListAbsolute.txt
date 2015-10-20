@@ -52,5 +52,3 @@ C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\Mvc
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\Common.Logging.xml
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\PostSharp.dll
 C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\PostSharp.xml
-C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\bin\MvcTestSystem.pssym
-C:\Users\Alex\Documents\Visual Studio 2012\Projects\MvcTestSystem\TestSystem\MvcTestSystem\obj\Debug\MvcTestSystem.dll.postsharp

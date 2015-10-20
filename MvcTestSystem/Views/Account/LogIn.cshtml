@@ -4,7 +4,7 @@
     ViewBag.Title = "LogIn";
 }
 
-<h2>Log In</h2>
+<h2>Log in</h2>
 
 @using (Html.BeginForm("LogIn", "Account"))
 {
@@ -30,8 +30,10 @@
             @Html.ValidationMessageFor(model => model.Password)
         </div>
 
+        @TempData["CustomError"]
+
         <p>
-            <input type="submit" value="Log In" />
+            <input type="submit" value="Log in" />
         </p>
 
     </fieldset>

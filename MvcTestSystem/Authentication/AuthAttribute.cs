@@ -7,6 +7,7 @@ using System.Web.Http.Controllers;
 using TestDatabase.Entities;
 using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
 
+
 namespace MvcTestSystem.Authentication
 {
     public class AuthAttribute : AuthorizeAttribute
@@ -15,6 +16,11 @@ namespace MvcTestSystem.Authentication
         {
             string controller = httpContext.Request.RequestContext.RouteData.Values["controller"].ToString();
             User user = HttpContext.Current.Session["user"] as User;
+
+            if (controller == "Account")
+            {
+                return true;
+            }
             if (user != null)
             {
                 if (controller == "Test")

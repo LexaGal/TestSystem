@@ -15,28 +15,23 @@ namespace MvcTestSystem.Controllers
     {
         private readonly ITaskRepository _taskRepository;
         private readonly ICodeRepository _codeRepository;
+        private readonly IAllCodeRepository _allCodeRepository;
         private readonly IResultRepository _resultRepository;
         private readonly IUserRepository _userRepository;
 
         public TestController(ITaskRepository taskRepository, ICodeRepository codeRepository,
-            IResultRepository resultRepository, IUserRepository userRepository)
+            IResultRepository resultRepository, IUserRepository userRepository, IAllCodeRepository allCodeRepository)
         {
             _taskRepository = taskRepository;
             _codeRepository = codeRepository;
             _resultRepository = resultRepository;
             _userRepository = userRepository;
+            _allCodeRepository = allCodeRepository;
         }
         
         public ActionResult Index()
         {
-            IList<Task> tasks = _taskRepository.GetAll().AsEnumerable().ToList();
-           
-            ((User)Session["user"]).SolvedTasks = 
-                UsersInfo.GetUserSolvedTasks(((User) Session["user"]).Id, tasks).ToList();
-            
-            ((User)Session["user"]).Tasks = 
-                UsersInfo.GetUserTasks(((User)Session["user"]).Id, tasks).ToList();
-
+            User user = ((User) Session["user"]);
             return View(_taskRepository.GetAll().AsEnumerable().OrderByDescending(t => t.Price));
         }
 
@@ -53,6 +48,7 @@ namespace MvcTestSystem.Controllers
             user.Tasks.Add(task);
 
             Code code = new Code(user.Id, Convert.ToInt32(codeViewModel.Id), codeViewModel.Code);
+            //_allCodeRepository.Add(code);//.Clone() as Code);
             _codeRepository.Add(code);
             Session["code"] = code;
 
@@ -65,10 +61,13 @@ namespace MvcTestSystem.Controllers
             User user = _userRepository.Get(code.UserId);
             Task task = _taskRepository.Get(code.TaskId);
 
+            user.Tasks = user.GetTasks().ToList();
+            user.SolvedTasks = user.GetSolvedTasks().ToList();
+
             Result result = _resultRepository.GetLastResultByCodeId(code.Id);
             if (result != null)
             {
-                if (result.ResultState == "Ok")
+                if (result.ResultState == "success")
                 {
                     user.SolvedTasks.Add(task);
                     return result.ResultState;
@@ -82,12 +81,12 @@ namespace MvcTestSystem.Controllers
         {
             IList<Task> tasks = _taskRepository.GetAll().AsEnumerable().ToList();
             IList<User> users = _userRepository.GetAll().AsEnumerable().ToList();
-            
-            foreach (var u in users)
+
+            foreach (var user in users)
             {
-                u.SolvedTasks = UsersInfo.GetUserSolvedTasks(u.Id, tasks).ToList();
+                user.SolvedTasks = user.GetSolvedTasks().ToList();
             }
-            
+
             return View(users.Where(u => u.Role == Role.User.ToString())
                 .OrderByDescending(u => u.SolvedTasks.Sum(t => t.Price)));
         }

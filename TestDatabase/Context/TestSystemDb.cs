@@ -10,6 +10,7 @@ namespace TestDatabase.Context
         public DbSet<User> Users;
         public DbSet<Task> Tasks;
         public DbSet<Code> Codes;
+        public DbSet<Code> AllCodes; 
         public DbSet<Result> Results;
         public DbSet<Test> Tests;
 
@@ -17,7 +18,7 @@ namespace TestDatabase.Context
         {
             modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<Task>().ToTable("Tasks");
-            modelBuilder.Entity<Code>().ToTable("Codes");
+            modelBuilder.Entity<Code>().ToTable("Codes");//.ToTable("AllCodes");
             modelBuilder.Entity<Result>().ToTable("Results");
             modelBuilder.Entity<Test>().ToTable("Tests");
         }

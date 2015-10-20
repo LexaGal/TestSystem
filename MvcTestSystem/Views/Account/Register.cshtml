@@ -5,6 +5,8 @@
     ViewBag.Title = "Register";
 }
 
+<h2>Register</h2>
+
 @using (Html.BeginForm("Register", "Account"))
 {
     @Html.AntiForgeryToken()
@@ -17,7 +19,7 @@
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
+            @Html.EditorFor(model => model.Name) @TempData["CustomError"]
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 

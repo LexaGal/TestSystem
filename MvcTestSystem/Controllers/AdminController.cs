@@ -22,12 +22,13 @@ namespace MvcTestSystem.Controllers
 
         public ActionResult Index()
         {
+            
             IList<Task> tasks = _taskRepository.GetAll().AsEnumerable().ToList();
             IList<User> users = _userRepository.GetAll().AsEnumerable().ToList();
 
-            foreach (var u in users)
+            foreach (var user in users)
             {
-                u.SolvedTasks = UsersInfo.GetUserSolvedTasks(u.Id, tasks).ToList();
+                user.SolvedTasks = user.GetSolvedTasks().ToList();
             }
 
             return View(users.Where(u => u.Role == Role.User.ToString())

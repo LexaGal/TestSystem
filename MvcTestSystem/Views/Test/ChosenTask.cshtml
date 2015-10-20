@@ -3,10 +3,10 @@
 
 @{
     ViewBag.Title = "ChosenTask";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ChosenTask</h2>
+<h2>Chosen task</h2>
 
 <fieldset>
     <legend>Task</legend>
@@ -33,7 +33,7 @@
 
     <div class="display-label">
         @Html.DisplayNameFor(model => model.Result):
-        @Html.DisplayFor(model => model.Result)
+        @Html.TextAreaFor(model => model.Result)
     </div>
 
     <div class="display-label">
@@ -44,18 +44,26 @@
 </fieldset>
 
 <div>
-    <textarea id="code"></textarea>
+    <textarea rows="30" cols="100" id="code">
+using System;
+namespace ConsoleApplication
+{
+    class Program
+    {
+        static void Main()
+        {
+            Console.Beep();
+        }
+    }
+}
+    </textarea>
 </div>
-
 <div>
-    <textarea id="result"></textarea>
+    <textarea rows="1" cols="30" id="result"></textarea>
 </div>
 
 <p>
     <button id="process">Process</button>
-</p>
-
-<p>
     <button id="refresh">Refresh</button>
 </p>
 
@@ -97,4 +105,4 @@
         });
     });
 </script>
-@Html.ActionLink("Back to List", "Index")
+@Html.ActionLink("Back to tasks", "Index")

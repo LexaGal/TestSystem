@@ -3,11 +3,11 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Tasks</h2>
-
+@Html.Encode(((User) Session["user"]).Name)
 <table>
     <tr>
         <th>
@@ -63,4 +63,4 @@
 
 </table>
 @Html.ActionLink("Watch statistics", "Statistics")
-@Html.ActionLink("Log Out", "LogIn", "Account")
+@Html.ActionLink("Log out", "LogIn", "Account")

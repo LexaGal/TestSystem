@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TestDatabase.Entities
 {
-    public class Code
+    public class Code : ICloneable
     {
         [Key]
         public int Id { get; private set; }
@@ -20,6 +21,11 @@ namespace TestDatabase.Entities
             UserId = userId;
             TaskId = taskId;
             Text = text;
+        }
+
+        public object Clone()
+        {
+            return new Code(UserId, TaskId, Text);
         }
     }
 }

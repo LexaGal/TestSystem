@@ -36,7 +36,7 @@
 
     <div class="display-label">
         @Html.DisplayNameFor(model => model.Result):
-        @Html.DisplayFor(model => model.Result)
+        @Html.TextAreaFor(model => model.Result)
     </div>
 
     <div class="display-label">
@@ -52,7 +52,7 @@
     
     foreach (var user in users)
     {
-        IList<Task> tasks = UsersInfo.GetUserSolvedTasks(user.Id, new List<Task>{Model}).ToList();
+        IList<Task> tasks = user.GetSolvedTasks().ToList();
         if (tasks.Any(t => t.Id == Model.Id))
         {
             @Html.Encode(user.Name)<br/>
@@ -60,5 +60,5 @@
     } 
 }
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to statistics", "Index")
 </p>

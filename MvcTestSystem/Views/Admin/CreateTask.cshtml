@@ -22,7 +22,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Time)
+            @Html.LabelFor(model => model.Time), Sec.:
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Time)
@@ -30,7 +30,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Memory)
+            @Html.LabelFor(model => model.Memory), Mb.:
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Memory)
@@ -68,7 +68,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to statistics", "Index")
 </div>
 
 @section Scripts {

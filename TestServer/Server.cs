@@ -20,6 +20,7 @@ namespace TestServer
                         ICompiler compiler = new CSharpCompiler();
                         var processBuilder = new ProcessBuilder();
                         var runer = new Runer();
+
                         List<Code> codes = codeRepository.ExtractAll().ToList();
                         codes.ForEach(item =>
                         {
@@ -43,7 +44,7 @@ namespace TestServer
                                             return;
                                         }
                                     }
-                                    catch (Exception)
+                                    catch (Exception e)
                                     {
                                         resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
                                             "out of memory on test " + (i + 1).ToString()));
@@ -52,7 +53,7 @@ namespace TestServer
 
                                     if (output == tests[i].Output) continue;
                                     resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
-                                        "wrong ansver on test " + (i + 1).ToString()));
+                                        "wrong answer on test " + (i + 1).ToString()));
                                     return;
                                 }
 
