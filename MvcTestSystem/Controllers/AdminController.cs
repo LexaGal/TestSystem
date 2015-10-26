@@ -22,14 +22,7 @@ namespace MvcTestSystem.Controllers
 
         public ActionResult Index()
         {
-            
-            //IList<Task> tasks = _taskRepository.GetAll().AsEnumerable().ToList();
             IList<User> users = _userRepository.GetAll().AsEnumerable().ToList();
-
-            //foreach (User user in users)
-            //{
-            //    user.SolvedTasks = user.GetSolvedTasks().ToList();
-            //}
 
             return View(users.Where(u => u.Role == Role.User.ToString())
                 .OrderByDescending(u => u.GetSolvedTasks().Sum(t => t.Price)));

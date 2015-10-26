@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Quartz;
 using TestDatabase.Entities;
 using TestDatabase.Repository.Abstract;
@@ -12,6 +13,7 @@ namespace TestServer
     {
         public void Execute(IJobExecutionContext context)
         {
+            StringBuilder testResultsBuilder = new StringBuilder();
             using (var testRepository = new TestRepository())
             {
                 using (var codeRepository = new CodeRepository())
@@ -27,7 +29,7 @@ namespace TestServer
                         {
                             if (!compiler.TryCompile(item.Text, @"F://test.exe"))
                             {
-                                resultRepository.Add(new TestDatabase.Entities.Result(item.Id, "compilation error",
+                                resultRepository.Add(new TestDatabase.Entities.Result(item.Id, "Compilation error",
                                     item.TaskId, item.UserId));
                             }
                             else
@@ -50,9 +52,15 @@ namespace TestServer
 
                                                 if (!runer.TryGetResult(proc, tests[i].Input, out output, memory, time))
                                                 {
+                                                    testResultsBuilder.AppendLine(
+                                                        string.Format(
+                                                            "Out of time on test {0}: \n[Input:\n {1}, \nOutput: \n{2}]",
+                                                            (i + 1).ToString(), tests[i].Input, tests[i].Output));
+
                                                     resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
-                                                        "out of time on test " + (i + 1).ToString(), item.TaskId,
-                                                        item.UserId));
+                                                        string.Format("Out of time on test {0}|{1}", (i + 1).ToString(),
+                                                            testResultsBuilder), item.TaskId, item.UserId));
+                                                    
                                                     return;
                                                 }
                                             }
@@ -60,20 +68,42 @@ namespace TestServer
                                     }
                                     catch (Exception)
                                     {
+                                        testResultsBuilder.AppendLine(
+                                            string.Format("Out of memory on test {0}: \n[Input:\n {1}, \nOutput: \n{2}]",
+                                                (i + 1).ToString(), tests[i].Input, tests[i].Output));
+
                                         resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
-                                            "out of memory on test " + (i + 1).ToString(), item.TaskId, item.UserId));
+                                            string.Format("Out of memory on test {0}|{1}", (i + 1).ToString(),
+                                                testResultsBuilder), item.TaskId, item.UserId));
+
                                         return;
                                     }
 
-                                    if (output == tests[i].Output) continue;
+                                    if (output == tests[i].Output)
+                                    {
+                                        testResultsBuilder.AppendLine(
+                                            string.Format("Test {0}: [\n[Input:\n {1}, \nOutput: \n{2}] passed successfully",
+                                                (i + 1).ToString(), tests[i].Input, tests[i].Output));
+                                        
+                                        continue;
+                                    }
+
+                                    testResultsBuilder.AppendLine(
+                                        string.Format("Wrong answer on test {0}: \n[Input:\n {1}, \nOutput: \n{2}]",
+                                            (i + 1).ToString(), tests[i].Input, tests[i].Output));
+
                                     resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
-                                        "wrong answer on test " + (i + 1).ToString(), item.TaskId, item.UserId));
+                                        string.Format("Wrong answer on test {0}|{1}", (i + 1).ToString(),
+                                            testResultsBuilder), item.TaskId, item.UserId));
+
                                     return;
                                 }
                             }
 
+                            testResultsBuilder.AppendLine("All tests passed successfully");
+
                             resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
-                                "success", item.TaskId, item.UserId));
+                                string.Format("Success|{0}", testResultsBuilder), item.TaskId, item.UserId));
                         });
                     }
                 }
