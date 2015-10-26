@@ -5,12 +5,12 @@ namespace TestServer
 {
     public class Runer
     {
-        public bool TryGetResult(Process proc, string input, out string output)
+        public bool TryGetResult(Process proc, string input, out string output, int memory, int time)
         {
             proc.Start();
-            //proc.MaxWorkingSet = new IntPtr(10000);
+            //proc.MaxWorkingSet = new IntPtr(memory);
             proc.StandardInput.WriteLine(input);
-            if (!proc.WaitForExit(1000))
+            if (!proc.WaitForExit(time))
             {
                 proc.Close();
                 output = string.Empty;
@@ -21,9 +21,8 @@ namespace TestServer
             output = tmp;
             if (tmp.Length > 2)
             {
-                output = tmp.Remove(tmp.Length - 3, 2);
+                output = tmp.Remove(tmp.Length - 2, 2);
             }
-            
             return true;
         }
     }

@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Mvc;
 using MvcTestSystem;
 
@@ -14,7 +15,7 @@ namespace MvcTestSystem
         /// <summary>Integrates Unity when the application starts.</summary>
         public static void Start() 
         {
-            var container = UnityConfig.GetConfiguredContainer();
+            IUnityContainer container = UnityConfig.GetConfiguredContainer();
 
             FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
             FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(container));
@@ -28,7 +29,7 @@ namespace MvcTestSystem
         /// <summary>Disposes the Unity container when the application is shut down.</summary>
         public static void Shutdown()
         {
-            var container = UnityConfig.GetConfiguredContainer();
+            IUnityContainer container = UnityConfig.GetConfiguredContainer();
             container.Dispose();
         }
     }

@@ -1,5 +1,6 @@
 ﻿@using Microsoft.Practices.Unity
 @using MvcTestSystem.Unity
+@using MvcTestSystem.UsersInfoAccess
 @using TestDatabase.Entities
 @using TestDatabase.Repository.Abstract
 
@@ -20,7 +21,7 @@
     <tr>
         <th>Users/Tasks</th>
         @{
-            foreach (var task in tasks.ToList())
+            foreach (Task task in tasks.ToList())
             {
                 <th>
                     @Html.Encode(task.Name)
@@ -31,7 +32,7 @@
     </tr>
 <tr>
 
-@foreach (var item in Model)
+@foreach (User item in Model)
 {
     <tr>
     <td>
@@ -41,11 +42,11 @@
               Html.Encode(item.Name))
 
     </td>
-    @foreach (var task in tasks)
+    @foreach (Task task in tasks)
     {
         <td>
             @{
-                if (item.SolvedTasks.Any(t => t.Id == task.Id))
+                if (item.GetSolvedTasks().Any(t => t.Id == task.Id))
                 {
                     @Html.Encode("Done")
                     continue;
@@ -54,7 +55,7 @@
             }
         </td>
     }
-        <td>@item.SolvedTasks.Sum(t => t.Price)</td>
+        <td>@item.GetSolvedTasks().Sum(t => t.Price)</td>
    </tr> 
 }
 

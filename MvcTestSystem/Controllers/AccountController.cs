@@ -26,7 +26,7 @@ namespace MvcTestSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _authProvider.Authenticate(loginModel.Name, loginModel.Password);
+                User user = _authProvider.Authenticate(loginModel.Name, loginModel.Password);
                 if (user != null)
                 {
                     Session["user"] = user;
@@ -54,7 +54,7 @@ namespace MvcTestSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _authProvider.Authenticate(registerModel.Name, registerModel.Password);
+                User user = _authProvider.Authenticate(registerModel.Name, registerModel.Password);
                 if (user != null)
                 {
                     TempData["CustomError"] = string.Format("Error: User with name '{0}' already exists", user.Name);

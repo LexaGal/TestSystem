@@ -1,9 +1,9 @@
-﻿@using TestDatabase.Entities
+﻿@using MvcTestSystem.UsersInfoAccess
+@using TestDatabase.Entities
 @model IEnumerable<TestDatabase.Entities.Task>
 
 @{
     ViewBag.Title = "Index";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Tasks</h2>
@@ -29,7 +29,7 @@
         </th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (Task item in Model)
     {
         <tr>
             <td>
@@ -49,7 +49,7 @@
             </td>
             <td>
                 @{
-                    if (((User) Session["user"]).SolvedTasks.Any(t => t.Id == item.Id))
+                    if (((User) Session["user"]).GetSolvedTasks().Any(t => t.Id == item.Id))
                     {
                         @Html.Encode("Done")
                         continue;

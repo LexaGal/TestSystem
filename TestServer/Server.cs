@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Quartz;
 using TestDatabase.Entities;
+using TestDatabase.Repository.Abstract;
 using TestDatabase.Repository.Concrete;
 
 namespace TestServer
@@ -26,7 +27,8 @@ namespace TestServer
                         {
                             if (!compiler.TryCompile(item.Text, @"F://test.exe"))
                             {
-                                resultRepository.Add(new TestDatabase.Entities.Result(item.Id, "compilation error"));
+                                resultRepository.Add(new TestDatabase.Entities.Result(item.Id, "compilation error",
+                                    item.TaskId, item.UserId));
                             }
                             else
                             {
@@ -34,32 +36,44 @@ namespace TestServer
                                 for (var i = 0; i < tests.Count; i++)
                                 {
                                     var proc = processBuilder.Create(@"F://test.exe");
-                                    string output;
+                                    string output = null;
                                     try
                                     {
-                                        if (!runer.TryGetResult(proc, tests[i].Input, out output))
+                                        using (ITaskRepository taskRepository = new TaskRepository())
                                         {
-                                            resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
-                                                "out of time on test " + (i + 1).ToString()));
-                                            return;
+                                            Task task = taskRepository.Get(item.TaskId);
+                                            if (task != null)
+                                            {
+                                                int memory = (int) task.Memory*1024*1024;
+
+                                                int time = (int) task.Time*1000;
+
+                                                if (!runer.TryGetResult(proc, tests[i].Input, out output, memory, time))
+                                                {
+                                                    resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
+                                                        "out of time on test " + (i + 1).ToString(), item.TaskId,
+                                                        item.UserId));
+                                                    return;
+                                                }
+                                            }
                                         }
                                     }
-                                    catch (Exception e)
+                                    catch (Exception)
                                     {
                                         resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
-                                            "out of memory on test " + (i + 1).ToString()));
+                                            "out of memory on test " + (i + 1).ToString(), item.TaskId, item.UserId));
                                         return;
                                     }
 
                                     if (output == tests[i].Output) continue;
                                     resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
-                                        "wrong answer on test " + (i + 1).ToString()));
+                                        "wrong answer on test " + (i + 1).ToString(), item.TaskId, item.UserId));
                                     return;
                                 }
-
-                                resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
-                                    "success"));
                             }
+
+                            resultRepository.Add(new TestDatabase.Entities.Result(item.Id,
+                                "success", item.TaskId, item.UserId));
                         });
                     }
                 }

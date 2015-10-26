@@ -11,8 +11,8 @@ namespace MvcTestSystem.Authentication
         {
             using (HashAlgorithm md5 = new SHA1CryptoServiceProvider())
             {
-                var data = Encoding.ASCII.GetBytes(text);
-                var result = md5.ComputeHash(data, 0, data.Count());
+                byte[] data = Encoding.ASCII.GetBytes(text);
+                byte[] result = md5.ComputeHash(data, 0, data.Count());
                 return Convert.ToBase64String(result);
             }
         }

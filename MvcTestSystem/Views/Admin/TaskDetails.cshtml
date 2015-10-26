@@ -50,7 +50,7 @@
     IEnumerable<User> users = userRepository.GetAll().AsEnumerable();
     @Html.Encode("Solved by: ")<br/>
     
-    foreach (var user in users)
+    foreach (User user in users)
     {
         IList<Task> tasks = user.GetSolvedTasks().ToList();
         if (tasks.Any(t => t.Id == Model.Id))
